@@ -23,13 +23,15 @@ public class DummyContent {
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
-    private static final int COUNT = 25;
+    private static final int COUNT = 7;
 
     static {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
+            addItem(createDummyItem(i, "https://www.google.co.uk"));
         }
+        DummyItem bingItem = createDummyItem(8, "https://www.bing.com");    // 1 more, with different url
+        addItem(bingItem);
     }
 
     private static void addItem(DummyItem item) {
@@ -37,8 +39,9 @@ public class DummyContent {
         ITEM_MAP.put(item.id, item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+    private static DummyItem createDummyItem(int position, String url) {
+//        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), "Item " + position + url , url, makeDetails(position));
     }
 
     private static String makeDetails(int position) {
@@ -55,18 +58,24 @@ public class DummyContent {
      */
     public static class DummyItem {
         public final String id;
-        public final String content;
-        public final String details;
+//        public final String content;        // boilerplate
+        public final String item_name;
+        public final String url;
+        public final String details;        // boilerplate
 
-        public DummyItem(String id, String content, String details) {
+//        public DummyItem(String id, String content, String details) {   // constructor??
+        public DummyItem(String id, String item_name, String url, String details) {   // constructor??
             this.id = id;
-            this.content = content;
-            this.details = details;
+//            this.content = content;
+            this.details = details; // boilerplate
+            this.item_name = item_name;
+            this.url = url;
         }
 
         @Override
         public String toString() {
-            return content;
+//            return content;
+            return item_name;
         }
     }
 }
